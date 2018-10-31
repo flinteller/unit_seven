@@ -3,6 +3,11 @@
 # This program encrypts and decrypts strings
 
 
+def user_action():
+    action = input("Press e to encode, d to decode, or q to quit: ")
+    return action
+
+
 def user_key():
     key = int(input("Please enter the key (0 - 25): "))
     return key
@@ -15,29 +20,54 @@ def rotate(key, alphabet):
     return new_alphabet
 
 
-def user_phrase():
-    phrase = input("Please enter the text to be encoded: ")
-    return phrase.lower()
+def encode_phrase():
+    en_phrase = input("Please enter the text to be encoded: ")
+    en_phrase = en_phrase.replace(" ", "")
+    return en_phrase.lower()
 
 
 def encode(phrase, alphabet, new_alphabet):
+    new_phrase = ""
     for letter in phrase:
         index = alphabet.index(letter)
-        new_phrase = new_alphabet[index]
+        new_letter = new_alphabet[index]
+        new_phrase = new_phrase + new_letter
     return new_phrase
 
 
+def decode_phrase():
+    de_phrase = input("Please enter the test to be decoded: ")
+    de_phrase = de_phrase.replace(" ", "")
+    return de_phrase.lower()
+
+
+def decode(phrase, alphabet, new_alphabet):
+    de_phrase = ""
+    for letter in phrase:
+        index = new_alphabet.index(letter)
+        new_letter = alphabet[index]
+        de_phrase = de_phrase + new_letter
+    return de_phrase
 
 
 def main():
     alphabet = "abcdefghijklmnopqrstuvwxyz"
+    action = user_action()
     key = user_key()
     new_alphabet = rotate(key, alphabet)
-    print(alphabet)
-    print(new_alphabet)
-    phrase = user_phrase()
-    new_phrase = encode(phrase, alphabet, new_alphabet)
-    print(new_phrase)
+    if action == "e":
+        en_phrase = encode_phrase()
+        new_phrase = encode(en_phrase, alphabet, new_alphabet)
+        print(new_phrase)
+    elif action == "d":
+        de_phrase = decode_phrase()
+        de_phrase = decode(de_phrase, alphabet, new_alphabet)
+        print(de_phrase)
+    elif action == "q":
+        print("Thanks for playing!")
+    else:
+        print("You have entered an invalid command")
+
 
 
 main()
