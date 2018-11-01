@@ -53,21 +53,27 @@ def decode(phrase, alphabet, new_alphabet):
 def main():
     alphabet = "abcdefghijklmnopqrstuvwxyz"
     action = user_action()
-    key = user_key()
-    new_alphabet = rotate(key, alphabet)
-    if action == "e":
-        en_phrase = encode_phrase()
-        new_phrase = encode(en_phrase, alphabet, new_alphabet)
-        print(new_phrase)
-    elif action == "d":
-        de_phrase = decode_phrase()
-        de_phrase = decode(de_phrase, alphabet, new_alphabet)
-        print(de_phrase)
-    elif action == "q":
-        print("Thanks for playing!")
-    else:
-        print("You have entered an invalid command")
-
+    while True:
+        if action == "q":
+            print("Thanks for playing!")
+            break
+        elif action == "e":
+            key = user_key()
+            new_alphabet = rotate(key, alphabet)
+            en_phrase = encode_phrase()
+            new_phrase = encode(en_phrase, alphabet, new_alphabet)
+            print(new_phrase)
+            break
+        elif action == "d":
+            key = user_key()
+            new_alphabet = rotate(key, alphabet)
+            de_phrase = decode_phrase()
+            de_phrase = decode(de_phrase, alphabet, new_alphabet)
+            print(de_phrase)
+            break
+        else:
+            print("You have entered an invalid command")
+            break
 
 
 main()
